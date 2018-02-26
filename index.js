@@ -73,9 +73,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery, delay) {
     
     var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
   request(URL, function (err, res, body) {
-    if (err) {
-        bot.sendMessage(468758493, err);
-    } else {
+    if (err) throw err;
     parce = JSON.parse(body);
     price = (parce.ticker.price);
     change = (parce.ticker.change);
@@ -88,7 +86,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery, delay) {
     
      bot.editMessageText(sendtouser, opts);
         
-      }
+      
     });
     
 });
