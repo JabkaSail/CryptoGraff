@@ -8,7 +8,7 @@ var moment = require('moment'); //For time
 
 var parce; //Parced data
 
-var base; //crypt name
+//var base; //crypt name
 
 var price; //price
 
@@ -39,7 +39,12 @@ bot.onText(/\/start/, function (msg, match) {
 
 //CAllBACK==================================================================\
 
-bot.on('callback_query', function onCallbackQuery(callbackQuery, delay) {
+
+    
+
+
+bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+    
   var action = callbackQuery.data;
   var msg = callbackQuery.message;
   var opts = {
@@ -73,6 +78,8 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery, delay) {
     
     var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
   request(URL, function (err, res, body) {
+      setTimeout(
+    function() {
     if (err) throw err;
     parce = JSON.parse(body);
     price = (parce.ticker.price);
@@ -83,12 +90,13 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery, delay) {
         
     var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
 //END OF PARCING_______________________________________________/
-    
+    //var Timeout210 = setTimeout(function() {}, 200);
+         
      bot.editMessageText(sendtouser, opts);
-        
-      
+      }, 1000); 
+     
     });
-    
+     
 });
 
 //CAllBACK_____________________________________________________________________________________________/
