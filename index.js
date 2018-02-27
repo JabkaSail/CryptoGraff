@@ -2,19 +2,17 @@ var TelegramBot = require('node-telegram-bot-api');
 
 var request = require('request');
 
-var config = require('./config'); 
+//var config = require('./config'); 
 
 var moment = require('moment'); //For time
 
 var parce; //Parced data
 
-//var base; //crypt name
-
 var price; //price
 
 var change; //price change
 
-var token = config.token; // Bot token
+var token = '527475365:AAHxVDBla2-Cojs_FZ78zDbCyL0AjgvfjqM'; // Bot token
 
 var bot = new TelegramBot(token, {polling: true}); 
 
@@ -38,10 +36,6 @@ bot.onText(/\/start/, function (msg, match) {
 
 
 //CAllBACK==================================================================\
-
-
-    
-
 
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
     
@@ -75,11 +69,9 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
     
     
 //START OF PARCING==============================================\
-    
-    var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
+
+       var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
   request(URL, function (err, res, body) {
-      setTimeout(
-    function() {
     if (err) throw err;
     parce = JSON.parse(body);
     price = (parce.ticker.price);
@@ -88,14 +80,11 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
     moment.locale("us");
     var now = moment().format('LLLL');
         
-    var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
-//END OF PARCING_______________________________________________/
-    //var Timeout210 = setTimeout(function() {}, 200);
-         
-     bot.editMessageText(sendtouser, opts);
-      }, 1000); 
-     
+        var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
+    
+         bot.editMessageText(sendtouser, opts);
     });
+        
      
 });
 
