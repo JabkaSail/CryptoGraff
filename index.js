@@ -2,15 +2,7 @@ var TelegramBot = require('node-telegram-bot-api');
 
 var request = require('request');
 
-//var config = require('./config'); 
-
 var moment = require('moment'); //For time
-
-var parce; //Parced data
-
-var price; //price
-
-var change; //price change
 
 var token = '527475365:AAHxVDBla2-Cojs_FZ78zDbCyL0AjgvfjqM'; // Bot token
 
@@ -38,6 +30,13 @@ bot.onText(/\/start/, function (msg, match) {
 //CAllBACK==================================================================\
 
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+    
+    var parce; //Parced data
+
+var price; //price
+
+var change; //price change
+
     
   var action = callbackQuery.data;
   var msg = callbackQuery.message;
@@ -70,22 +69,24 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
     
 //START OF PARCING==============================================\
 
-       var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
-  request(URL, function (err, res, body) {
-    if (err) throw err;
-    parce = JSON.parse(body);
-    price = (parce.ticker.price);
-    change = (parce.ticker.change);
-    
-    moment.locale("us");
-    var now = moment().format('LLLL');
-        
-        var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
-    
-         bot.editMessageText(sendtouser, opts);
-    });
-        
+   var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
+   request(URL, function (err, res, body) {
+     if (err) throw err;
+         bot.sendMessage(468758493, err);
+     parce = JSON.parse(body);
+     price = (parce.ticker.price);
+     change = (parce.ticker.change);
      
-});
+     moment.locale("us");
+     var now = moment().format('LLLL');
+         
+     var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
+ //END OF PARCING_______________________________________________/
+     
+      bot.editMessageText(sendtouser, opts);
+         
+     });
+     
+ });
 
 //CAllBACK_____________________________________________________________________________________________/
