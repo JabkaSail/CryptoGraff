@@ -71,7 +71,7 @@ var change; //price change
 
    var URL = "https://api.cryptonator.com/api/ticker/"+ action +"-usd";
    request(URL, function (err, res, body) {
-     if (err) throw err;
+     if (err) parce = 0;
          bot.sendMessage(468758493, err);
      parce = JSON.parse(body);
      price = (parce.ticker.price);
