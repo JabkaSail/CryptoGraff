@@ -80,7 +80,7 @@ var change; //price change
      moment.locale("us");
      var now = moment().format('LLLL');
          
-     var sendtouser = "Time: " + now + ". " + action + " rate: " + price + "$ " + "Change: " + change + "$";
+     var sendtouser = "Time: " + now + ".\n" + action + " rate: " + price + "$\n" + "Change: " + change + "$\n";
  //END OF PARCING_______________________________________________/
      
       bot.editMessageText(sendtouser, opts);
