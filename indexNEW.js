@@ -16,7 +16,7 @@ bot.onText(/\/start/, function (msg, match) {
 //----------------------------------------------------------------------------------
 bot.onText(/\/(.+)/, function (msg, match) {
  // bot.sendMessage(msg.chat.id, 'Press this button:', CryptoVaultBTNS);
-  var fromId = msg.from.id;
+  var fromId = msg.chat.id;
   var resp = match[1];
   console.log(resp);
   var parce; //Parced data
@@ -37,7 +37,7 @@ bot.onText(/\/(.+)/, function (msg, match) {
      var sendtouser = resp + " rate: " + price + "₽\n" + "Change: " + change + "%";
  //END OF PARCING_______________________________________________/
      
-      bot.sendMessage(msg.from.id, sendtouser);
+      bot.sendMessage(msg.chat.id, sendtouser);
      });
     }
     else {
@@ -52,7 +52,7 @@ bot.onText(/\/(.+)/, function (msg, match) {
      var sendtouser = resp + " rate: " + price + "$\n" + "Change: " + change + "%";
  //END OF PARCING_______________________________________________/
      
-      bot.sendMessage(msg.from.id, sendtouser);
+      bot.sendMessage(msg.chat.id, sendtouser);
      });
    } 
 });
